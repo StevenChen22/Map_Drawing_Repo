@@ -4,6 +4,7 @@
 import turtle
 import csv
 import sys
+import getopt
 
 # Create empty lists
 cities = []
@@ -16,12 +17,21 @@ turtle.hideturtle()
 # Open the file and make it a list of lists
 def main(argv):
     user_file = ""
+    try:
+        opts, args = getopt.getopt(argv,"hi:",["ifile="])
+    except getopt.GetoptError:
+        print("name-strip.py -i <input_file>")
+        sys.exit(2)
     for opt, arg in opts:
         if opt in ("-i", "--ifile"):
             user_file = arg
     if user_file == "":
         print("No file entered. Program terminating.")
         sys.exit()
+        
+# Run Program from Command Line
+if __name__ == "__main__":
+    main(sys.argv[1:])
 
 map_csv = csv.reader(open(user_file))
 for row in map_csv:
